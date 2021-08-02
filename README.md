@@ -19,22 +19,22 @@ Saves you from many chores of manually moderating a Haxball room.
 
 
 # Customizing
-It is recommended to edit a few parts of the code. [Notepad++](https://notepad-plus-plus.org/) can be useful for this.
+It is recommended to edit a few things before running the bot. These can be found at the very beginning of the code. [Notepad++](https://notepad-plus-plus.org/) can be useful for editing stuff.
 ## Room name
-Edit the first line of the code to have something like this:
+Type a custom room name like this:
 ```javascript
 roomName:"👽 My Room Name",
 ```
 
 ## Max players
-You can also edit the player capacity of the room in the first line:
+You can also edit the player capacity of the room:
 ```javascript
 maxPlayers:12,
 ```
-It is recommended to have a big capacity. You can reduce it later, using the [.game poplimit](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands#game-action) command.
+However, it is recommended to have a big room capacity. You can reduce it later using the [.game poplimit](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands#game-action) command.
 
 ## Admin password
-You should edit this part in Line 2:
+You should edit this part:
 ```javascript
 adminPass:"aDmInPw#*123"
 ```
@@ -44,7 +44,7 @@ adminPass:"aDmInPw#*123"
   * Password is case-sensitive and cannot have spaces
 
 ## Stadium data
-If you want to load your custom maps with chat commands, edit this part in Line 2:
+If you want to load your custom maps with chat commands, edit this part:
 ```javascript
 mapsUrl:"https://example.com/my_maps.json"
 ```
@@ -52,11 +52,19 @@ Stadium data should be a valid JSON object where keys are map names and values a
 ```javascript
 {
   "Futsal":{"name":"..."},
-  "SpaceBounce":{"name":"..."},
+  "LongBounce":{"name":"..."},
   "etc":{"name":"..."}
 }
 ```
 Notice there is no comma at the end of last stadium. It is recommended to minify your hbs files with a JSON minifier.
 
-# Notes
-- For further information, check out basro's [Headless Host Reference](https://github.com/haxball/haxball-issues/wiki)
+Alternatively (not recommended), you can add stadium data to the very end of the code like this:
+```javascript
+room.onRoomLink=()=>{
+  Bot.data.maps={
+    "Futsal":{"name":"..."},
+    "LongBounce":{"name":"..."},
+    "etc":{"name":"..."}
+  }
+}
+```
