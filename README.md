@@ -31,7 +31,7 @@ You can also edit the player capacity of the room:
 ```javascript
 maxPlayers:12,
 ```
-However, it is recommended to have a big room capacity. You can reduce it later using the [.game poplimit](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands#game-action) command.
+However, it is recommended to have a big room capacity. You can reduce it later using the [.poplimit](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands#poplimit-value) command.
 
 ## Admin password
 You should edit this part:
@@ -60,11 +60,11 @@ Notice there is no comma at the end of last stadium. It is recommended to minify
 
 Alternatively (not recommended), you can add stadium data to the very end of the code like this:
 ```javascript
-room.onRoomLink=()=>{
+setTimeout(()=>{
   Bot.data.maps={
     "Futsal":{"name":"..."},
     "LongBounce":{"name":"..."},
     "etc":{"name":"..."}
   }
-}
+},5000);
 ```
