@@ -6,7 +6,7 @@ Saves you from many chores of manually moderating a Haxball room.
 
 # Main Features
 - Automatically mutes spammers
-- You can blacklist players based on IP address or nickname
+- You can blacklist players based on auth, IP address or nickname
 - A lot of handy chat commands and hidden admin mode
 - Command prefix is `.` (`!` also works)
 
@@ -37,7 +37,7 @@ You should edit this part near the beginning of the file:
 ```javascript
 ["admin1","admin2","admin3","admin4"]
 ```
-Each password is for a different admin level. L1 admins can only stop/start the games etc. L3 and L4 admins can kick / ban / blacklist people, so be careful who you share this password with.
+Each password is for a different admin level. L1 admins can only stop / start the games etc. L2 can kick / ban, L3 can mute / blacklist people, so be careful who you share this password with. L4 admin can change security settings so it should be dedicated to the room owner.
 
 * Notes for admins:
   * When you join the room, you can get admin rights by typing `.admin aDmInPw#*123` in chat
@@ -50,14 +50,14 @@ If you want to load your custom maps with chat commands, edit this part:
 ```javascript
 mapsUrl:"https://example.com/my_maps.json"
 ```
-Stadium data should be a valid JSON object where keys are map names and values are `*.hbs` file contents. An example can be found [here](https://api.jsonbin.io/b/60f97503a263d14a2979f185). The object should look like this:
+Stadium data should be a valid JSON object where keys are map names and values are `*.hbs` file contents. The object should look like this:
 ```javascript
 {
-  "Futsal":{hbs:{"name":"..."}},
-  "LongBounce":{m:"Custom message for this stadium",hbs:{"name":"..."}},
-  "etc":{m:"",hbs:{"name":"..."}}
+  "Futsal" : {"hbs" : {"name":"..."}},
+  "LongBounce" : {"m" : "X = Brake", "hbs" : {"name":"..."}},
+  "etc" : {"m" : "", "hbs" : {"name":"..."}}
 }
 ```
-Notice there is no comma at the end of last stadium. It is recommended to minify your hbs files with a JSON minifier.
+Notice there is no comma at the end of last stadium. `"m"` values change the MOTD of the room when loaded. It is recommended to minify your .hbs files with a JSON minifier, such as [this one](https://jsonformatter.org/json-minify).
 
 You can parse a different JSON file using this command: `.maps fetch [url_new_JSON_file]`
