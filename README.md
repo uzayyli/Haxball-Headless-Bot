@@ -37,13 +37,23 @@ You should edit this part near the beginning of the file:
 ```javascript
 ["admin1","admin2","admin3","admin4"]
 ```
-Each password is for a different admin level. L1 admins can only stop / start the games etc. L2 can kick / ban, L3 can mute / blacklist people, so be careful who you share this password with. L4 admin can change security settings so it should be dedicated to the room owner.
+Each password is for a different admin level. L1 admins can only stop / start the games etc. L2 can kick / ban, L3 can mute / blacklist people, so be careful who you share this password with. L4 admin can change security settings so it should be reserved for the room owner. Do NOT give out your L4 admin password unless you 101% trust someone!
 
 * Notes for admins:
   * When you join the room, you can get admin rights by typing `.admin aDmInPw#*123` in chat
   * You can become a hidden admin by typing `.admin aDmInPw#*123 hidden`. Your name will not be highlighted in yellow but you will still be able to use admin commands. It is useful to detect naughty players etc.
-  * Password is case-sensitive and cannot have spaces
-  * You can set another player's admin level with `.setadminlevel [playerName] 2 (hidden)`
+  * Password is case-sensitive and cannot have spaces! Space is the only character that is not allowed
+  * You can set another player's admin level with `.setadminlevel [playerName] 3 (hidden)`. You can use `sal` command alias too.
+
+## Trusted admin list
+You can save trusted admins by their auth codes and intended admin levels so they don't need to supply a password. An example JSON file should look like this:
+```javascript
+{
+"auth1" : {"L" : 4, "d" : "description for admin 1"},
+"auth2" : {"L" : 3, "d" : "description for admin 2"}
+}
+```
+A level 4 admin can update this data by using the command `.admin trusted fetch [url]` (no need to supply a URL if you are updating the same file)
 
 ## Stadium data
 If you want to load your custom maps with chat commands, edit this part:
@@ -60,4 +70,4 @@ Stadium data should be a valid JSON object where keys are map names and values a
 ```
 Notice there is no comma at the end of last stadium. `"m"` values change the MOTD of the room when loaded. It is recommended to minify your .hbs files with a JSON minifier, such as [this one](https://jsonformatter.org/json-minify).
 
-You can parse a different JSON file using this command: `.maps fetch [url_new_JSON_file]`
+You can parse a different JSON file using this command: `.maps fetch [url_new_JSON_file]` (no need to supply a URL if you are updating the same file)
