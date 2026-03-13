@@ -1,6 +1,6 @@
 # Haxball Headless Bot
 
-**NOTE**: version 7 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/blob/main/v6) is pretty much tested and has no known bugs.
+**NOTE**: version 7 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/tree/master/old/version6_stable) is pretty much tested and has no known bugs.
 
 A feature-rich, yet lightweight Haxball bot. 
 
