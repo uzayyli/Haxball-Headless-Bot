@@ -1,6 +1,6 @@
 # Haxball Headless Bot
 
-**NOTE**: version 7 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/tree/master/old/version6_stable) is pretty much tested and has no known bugs.
+**NOTE**: version 8 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/tree/master/old/version6_stable) is pretty much tested and has no known bugs.
 
 A feature-rich, yet lightweight Haxball bot. 
 
@@ -45,10 +45,10 @@ Each password is for a different admin level. L1 admins can only stop / start th
 Notice that each level is an array so it can have multiple passwords.
 
 * Notes for admins:
-  * When you join the room, you can get admin rights by typing `.admin aDmInPw#*123 h` in chat. This will make you a hidden admin, (no yellow name, no mouse)
-  * If you want to be a visible admin, omit the final `h` character, such as `.admin aDmInPw#*123`
+  * When you join the room, you can get admin rights by typing `.admin aDmInPw#*123` in chat. This will make you a hidden admin, (no yellow name, no mouse)
+  * If you want to be a visible admin, type `.toggle_admin` or simply `.ta`
   * Password is case-sensitive and cannot have spaces! Space is the only character that is not allowed
-  * You can set another player's admin level with `.setadminlevel [playerName] [level] [visible]`. You can use `.sal` command alias too.
+  * You can set another player's admin level with `.setadminlevel [playerName] [level]`. You can use `.sal` command alias too.
 
 ## Trusted admin list
 You can save trusted admins by their auth codes and intended admin levels so they don't need to supply a password. An example JSON file should look like this:
@@ -74,4 +74,4 @@ Stadium data should be a valid JSON object where keys are map names and values a
 ```
 Notice there is no comma at the end of last stadium. `"m"` values change the MOTD of the room when loaded. `"t"` sets team caps such as 4v4. It is recommended to minify your .hbs files with a JSON minifier, such as [this one](https://jsonformatter.org/json-minify).
 
-You can parse a different JSON file using this command: `.map refetch [url]` (no need to supply a URL if you are updating the same file. Beware of caching, though)
+You can parse a different JSON file using this command: `.fetch stadiums [url]` (no need to supply a URL if you are updating the same file. Beware of caching, though)
