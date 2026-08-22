@@ -1,77 +1,136 @@
 # Haxball Headless Bot
 
-**NOTE**: version 8 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/tree/master/old/version6_stable) is pretty much tested and has no known bugs.
+A feature-rich, yet lightweight Haxball bot. Runs entirely in the browser console — no server, install, or Node setup required. Saves you from the chores of manually moderating a Haxball room.
 
-A feature-rich, yet lightweight Haxball bot. 
+## Table of contents
 
-Saves you from many chores of manually moderating a Haxball room.
+- [Features](#features)
+- [Requirements](#requirements)
+- [Quick start](#quick-start)
+- [Configuration](#configuration)
+  - [Room name](#room-name)
+  - [Max players](#max-players)
+  - [Admin passwords](#admin-passwords)
+  - [Trusted admin list](#trusted-admin-list)
+  - [Stadium data](#stadium-data)
+- [Commands](#commands)
 
+## Features
 
-# Main Features
 - Automatically mutes spammers
-- Can blacklist players based on auth, IP address or nickname
-- A lot of handy chat commands and hidden admin mode
+- Blacklist players by auth, IP address, or nickname
+- A wide range of chat commands, including a hidden admin mode
 - Command prefix is `.` (`!` also works)
 
+## Requirements
 
-# Quick Start
-- Go to [https://www.haxball.com/headless](https://www.haxball.com/headless) and open the browser console (shortcut: <kbd>F12</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd>)
-- Copy-paste the bot code into the console and press <kbd>Enter</kbd>
-- Done! Open the room URL on a new tab (<kbd>Ctrl</kbd> + <kbd>LeftClick</kbd>) to join the game
-- Type `.help` in chat or see [Chat commands wiki](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands) for the list of commands
+- A Chromium-based browser (Chrome, Edge, Brave, etc.)
+- Nothing else — the bot is a single script pasted into the browser console, no installation needed
 
+## Quick start
 
-# Customizing
-It is recommended to edit a few things before running the bot. [Notepad++](https://notepad-plus-plus.org/) can be useful for editing stuff.
-## Room name
-In the beginning of the code, type a custom room name like this:
+1. Go to [haxball.com/headless](https://www.haxball.com/headless) and open the browser console (<kbd>F12</kbd>, or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd>)
+2. Copy-paste the bot code into the console and press <kbd>Enter</kbd>
+3. Open the room URL in a new tab (<kbd>Ctrl</kbd> + click it) to join the game
+4. Type `.help` in chat, or see the [Chat Commands wiki](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands) for the full list
+
+> **Tip:** keep the console tab open — closing it, or letting the browser put the tab to sleep, stops the room.
+
+## Configuration
+
+It's recommended to edit the following before running the bot for the first time. All of these live near the top of the script.
+
+### Room name
+
+Find the room name string and replace it with your own:
+
 ```javascript
-roomName:"👽 My Room Name",
+// before
+'4v4 Qatar/BFF Futsal | SYD'
+
+// after
+'Your room name here'
 ```
 
-## Max players
-You can also edit the player capacity of the room:
+### Max players
+
+Find `maxPlayers` and set your player cap. Note this value may appear as a hex literal (e.g. `0xe` is `14` in decimal):
+
 ```javascript
-maxPlayers:12,
+// before
+'maxPlayers': 0xe
+
+// after
+'maxPlayers': 12
 ```
 
-## Admin passwords
-You should edit admin passwords near the beginning of the file:
+### Admin passwords
+
+Set your own admin passwords near the top of the script:
+
 ```javascript
-"adminpw1", "adminpw4" // etc
+// before
+'adminpw1'
+
+// after
+'Your new password'
 ```
-Each password is for a different admin level. L1 admins can only stop / start the games etc. L2 can kick / ban, L3 can mute / blacklist people, so be careful who you share this password with. L4 admin can change security settings so it should be reserved for the room owner. Do NOT give out your L4 admin password unless you 101% trust someone!
 
-Notice that each level is an array so it can have multiple passwords.
+Each password maps to an admin level. Each level is an **array**, so you can set multiple passwords per level.
 
-* Notes for admins:
-  * When you join the room, you can get admin rights by typing `.admin aDmInPw#*123` in chat. This will make you a hidden admin, (no yellow name, no mouse)
-  * If you want to be a visible admin, type `.toggle_admin` or simply `.ta`
-  * Password is case-sensitive and cannot have spaces! Space is the only character that is not allowed
-  * You can set another player's admin level with `.setadminlevel [playerName] [level]`. You can use `.sal` command alias too.
+| Level | Can do |
+|---|---|
+| L1 | Stop / start games |
+| L2 | Kick / ban |
+| L3 | Mute / blacklist |
+| L4 | Change security settings — reserve this for the room owner |
 
-## Trusted admin list
-You can save trusted admins by their auth codes and intended admin levels so they don't need to supply a password. An example JSON file should look like this:
+> ⚠️ Do **not** share your L4 password unless you trust that person completely — it can change who else has admin access.
+
+**Notes for admins:**
+- Get admin rights by typing `.admin yourPassword123` in chat — this grants *hidden* admin (no yellow name, no visible cursor)
+- To become a visible admin instead, type `.toggle_admin` (alias: `.ta`)
+- Passwords are case-sensitive; spaces are the only disallowed character
+- Set another player's admin level with `.setadminlevel [playerName] [level]` (alias: `.sal`)
+
+### Trusted admin list
+
+Save trusted admins by their auth codes so they don't need a password:
+
 ```javascript
 [
-  {"L" : 4, "d" : "description for admin 1", "a": "auth1"},
-  {"L" : 3, "d" : "description for admin 2", "a": "auth2"},
+  { "L": 4, "d": "description for admin 1", "a": "auth1" },
+  { "L": 3, "d": "description for admin 2", "a": "auth2" }
 ]
 ```
 
-## Stadium data
-If you want to load your custom maps with chat commands, edit this part:
+`L` is admin level, `d` is a free-text description, `a` is the player's auth code.
+
+### Stadium data
+
+To load custom maps via chat commands, point this at your own hosted JSON:
+
 ```javascript
-mapsUrl:"https://example.com/my_maps.json"
+mapsUrl: "https://example.com/my_maps.json"
 ```
-Stadium data should be a valid JSON object where keys are map names and values are `*.hbs` file contents. The object should look like this:
+
+That file should be a JSON array where each entry describes one map:
+
 ```javascript
 [
-  {"name": "Futsal", "t":[4,4], "hbs" : {"name":"..."}},
-  {"name": "LongBounce", "m" : "X = Brake", "hbs" : {"name":"..."}},
-  {"name":"etc", "m" : "", "hbs" : {"name":"..."}}
+  { "name": "Futsal", "t": [4, 4], "hbs": { "name": "..." } },
+  { "name": "LongBounce", "m": "X = Brake", "hbs": { "name": "..." } },
+  { "name": "etc", "m": "", "hbs": { "name": "..." } }
 ]
 ```
-Notice there is no comma at the end of last stadium. `"m"` values change the MOTD of the room when loaded. `"t"` sets team caps such as 4v4. It is recommended to minify your .hbs files with a JSON minifier, such as [this one](https://jsonformatter.org/json-minify).
 
-You can parse a different JSON file using this command: `.fetch stadiums [url]` (no need to supply a URL if you are updating the same file. Beware of caching, though)
+- `hbs` — the map's `.hbs` file contents. Minifying them first (e.g. with a [JSON minifier](https://jsonformatter.org/json-minify)) keeps the file small.
+- `m` — sets the room's MOTD when that map loads
+- `t` — sets team caps, e.g. `[4, 4]` for 4v4
+- The last entry in the array must **not** have a trailing comma
+
+You can reload a different stadium file at any time with `.fetch stadiums [url]` — omit the URL to re-fetch the same file (watch out for browser caching).
+
+## Commands
+
+Full command reference: [Chat Commands wiki](https://github.com/uzayyli/Haxball-Headless-Bot/wiki/Chat-Commands)
