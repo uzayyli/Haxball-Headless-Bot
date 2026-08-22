@@ -1,0 +1,23 @@
+{
+  "name": "haxball-headless-bot",
+  "version": "1.0.0",
+  "description": "**NOTE**: version 8 is still under testing and it may contain bugs, [version 6](https://github.com/uzayyli/Haxball-Headless-Bot/tree/master/old/version6_stable) is pretty much tested and has no known bugs.",
+  "homepage": "https://github.com/uzayyli/Haxball-Headless-Bot#readme",
+  "bugs": {
+    "url": "https://github.com/uzayyli/Haxball-Headless-Bot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uzayyli/Haxball-Headless-Bot.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "bot.js",
+  "scripts": {
+    "build": "node obfuscate.js"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^5.5.1"
+  }
+}
